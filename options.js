@@ -48,21 +48,29 @@ function restore_options() {
           }
           var li_contato = document.createElement("LI");
           var li_contato_img = document.createElement("IMG");
+          var li_contato_span_texto = document.createElement("SPAN");
           var li_contato_text = document.createTextNode(contatos[id]["nome"]);
           var li_contato_botao_rm = document.createElement("BUTTON");
           var li_contato_botao_rm_text = document.createTextNode("Mostrar contato");
 
           li_contato_botao_rm.addEventListener('click', remover_contato);
           li_contato_botao_rm.setAttribute("data-idcontato", id);
+          li_contato_botao_rm.setAttribute("class", "btn btn-danger");
 
           li_contato.setAttribute("id", id);
-          li_contato_img.setAttribute("width", "30px");
-          li_contato_img.setAttribute("height", "30px");
+          li_contato.setAttribute("class", "list-group-item");
+
+          li_contato_img.setAttribute("width", "36px");
+          li_contato_img.setAttribute("height", "36px");
           li_contato_img.setAttribute("src", img);
+          li_contato_img.setAttribute("class", "pull-left");
+
+          li_contato_span_texto.setAttribute("class", "texto");
 
           li_contato.appendChild(li_contato_img);
-          li_contato.appendChild(li_contato_text);
+          li_contato.appendChild(li_contato_span_texto);
           li_contato.appendChild(li_contato_botao_rm);
+          li_contato_span_texto.appendChild(li_contato_text);
           li_contato_botao_rm.appendChild(li_contato_botao_rm_text);
           lista.appendChild(li_contato);
         }

@@ -16,6 +16,9 @@ Para mostrar novamente o contato, basta acessar a pagina de opções da extensã
 
 ## Change log:
 
+0.1.1
+- Melhorada interface da página de opções.
+
 0.1.0
 - Extensão criada
 
