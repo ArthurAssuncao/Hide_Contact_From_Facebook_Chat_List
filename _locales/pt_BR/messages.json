@@ -1,0 +1,14 @@
+{
+    "id": {
+        "message": "B70EC6F77DFAFD0E7D05B5CD7B127EF4",
+        "description": "md5 do nome da extensao em ingles" /* Hide Contact From Facebook Chat List */
+    },
+    "name": {
+        "message": "Hide Contact From Facebook Chat List",
+        "description": "Extension name"
+    },
+    "description": {
+        "message": "Esconde contatos da lista de chat do Facebook",
+        "description": "Extension description"
+    }
+}
