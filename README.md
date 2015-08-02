@@ -4,12 +4,15 @@ O contato continua te vendo na lista do chat dele, porém voce não o vê mais.
 
 Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é possível trocar mensagens com os contatos.
 
+## URL para instalar no Google Chrome
+[<img src="http://www.google.com/intl/pt-BR/chrome/assets/consumer/images/delorean/122010_webstore.jpg" height=30px />  Hide Contact From Facebook Chat List na Google Chrome Store](https://chrome.google.com/webstore/detail/hide-contact-from-faceboo/dldcnjjdfolnampaceecohfaolbefbhj)
+
 ## Funções:
 - Esconde contatos da lista do chat do Facebook sem bloquear o contato.
 
 ## Como usar:
 Clique sobre o contato e arraste até a área de soltura no centro da página.
-Para mostrar novamente o contato, basta acessar a pagina de opcoes da extensão e clicar em Mostrar Contato.
+Para mostrar novamente o contato, basta acessar a pagina de opções da extensão e clicar em Mostrar Contato.
 
 ## Change log:
 
