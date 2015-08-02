@@ -1,6 +1,8 @@
 # Hide Contact From Facebook Chat List
 Esconde contatos da lista do chat do Facebook sem bloquear o contato.
-O contato continua te vendo na lista do chat dele, porem voce não o vê mais.
+O contato continua te vendo na lista do chat dele, porém voce não o vê mais.
+
+Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é possível trocar mensagens com os contatos.
 
 ## Funções:
 - Esconde contatos da lista do chat do Facebook sem bloquear o contato.
