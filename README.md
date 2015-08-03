@@ -11,10 +11,13 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 - Esconde contatos da lista do chat do Facebook sem bloquear o contato.
 
 ## Como usar:
-Clique sobre o contato e arraste até a área de soltura no centro da página.
-Para mostrar novamente o contato, basta acessar a pagina de opções da extensão e clicar em Mostrar Contato.
+- Clique sobre o contato e arraste até a área de soltura no centro da página.
+- Para mostrar novamente o contato, basta acessar a pagina de opções da extensão e clicar em Mostrar Contato.
 
 ## Change log:
+
+0.1.2
+- Adicionada opção para bloquear acesso ao perfil do contato.
 
 0.1.1
 - Melhorias na interface da página de opções.

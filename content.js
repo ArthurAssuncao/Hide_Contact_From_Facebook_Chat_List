@@ -9,6 +9,38 @@ var seletor_painel_chat_inicio = "li[data-id='";
 var seletor_painel_chat_fim = "']"
 var str_contatos_bloqueados = 'contatos_bloqueados';
 
+//bloqueia a pagina caso seja de um contato oculto e marcado para bloquear
+//<meta property="al:android:url" content="fb://profile/id_contato" />
+function bloquear_pagina(){
+    var metas = document.getElementsByTagName('meta');
+    var deve_bloquear = false;
+    for (i = 0; i < metas.length; i++) {
+        id_pagina = null;
+        if (metas[i].getAttribute("content") != null && metas[i].getAttribute("content").indexOf("fb://profile/") != -1) {
+            var str = metas[i].getAttribute("content");
+            id_pagina = str.substr(str.indexOf("fb://profile/") + "fb://profile/".length, str.length);
+            console.log(id_pagina);
+            break;
+        }
+
+    }
+    if(id_pagina != null){
+        var storage = chrome.storage.local;
+        storage.get(str_contatos_bloqueados, function(r){
+            var contatos = r[str_contatos_bloqueados];
+            if(contatos[id_pagina] != 'undefined' && contatos[id_pagina]["bloquear_perfil"] != 'undefined'){
+                deve_bloquear = contatos[id_pagina]["bloquear_perfil"];
+                if(id_pagina != null && deve_bloquear){
+                    var url_contato_bloqueado = chrome.extension.getURL("contato_bloqueado.html");
+                    console.log("Redircionando para: " + url_contato_bloqueado);
+                    //chrome.extension.sendMessage({redirect: url_contato_bloqueado});
+                    location.href = url_contato_bloqueado;
+                }
+            }
+        });
+    }
+}
+
 setStyleRule = function(selector, rule) {
     var stylesheet = document.styleSheets[(document.styleSheets.length - 1)];
     if(stylesheet.addRule) {
@@ -39,9 +71,6 @@ function escoder_contato(contato, insert){
     }
 }
 
-//document.addEventListener('DOMContentLoaded', fireContentLoadedEvent, false);
-window.addEventListener ("load", fireContentLoadedEvent, false);
-
 function update_lista(lista){
     var lista_contatos = {};
     if(lista != null){
@@ -52,7 +81,7 @@ function update_lista(lista){
                 var id_contato = item.getAttribute("data-id");
                 var nome_contato = item.childNodes[0].childNodes[0].childNodes[2].childNodes[0].innerHTML;
                 var img = item.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].getAttribute("src");
-                var contato = {"id": id_contato, "nome": nome_contato, "img": img};
+                var contato = {"id": id_contato, "nome": nome_contato, "img": img, "bloquear_perfil": false};
                 item.setAttribute("draggable", "true");
                 item.ondragstart = function(event){
                     console.log("Abrir lixeira");
@@ -63,7 +92,7 @@ function update_lista(lista){
                     var nome_contato = item.childNodes[0].childNodes[0].childNodes[2].childNodes[0].innerHTML;
                     var img = item.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].getAttribute("src");
                     event.dataTransfer.effectAllowed = "move";
-                    var contato = {"id": id_contato, "nome": nome_contato, "img": img};
+                    var contato = {"id": id_contato, "nome": nome_contato, "img": img, "bloquear_perfil": false};
                     event.dataTransfer.setData("contato", JSON.stringify(contato));
                     return true;
                 }
@@ -148,3 +177,6 @@ function fireContentLoadedEvent () {
         }
     }
 } //funcao executada ao fim da pagina carregar
+
+document.addEventListener('DOMContentLoaded', bloquear_pagina, false);
+window.addEventListener ("load", fireContentLoadedEvent, false);

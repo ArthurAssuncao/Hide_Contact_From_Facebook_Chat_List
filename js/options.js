@@ -52,10 +52,20 @@ function restore_options() {
           var li_contato_text = document.createTextNode(contatos[id]["nome"]);
           var li_contato_botao_rm = document.createElement("BUTTON");
           var li_contato_botao_rm_text = document.createTextNode("Mostrar contato");
+          var li_contato_check_bloquear = document.createElement("INPUT");
+
+          li_contato_check_bloquear.setAttribute("type", 'checkbox');
+          li_contato_check_bloquear.setAttribute("name", 'checkbox_bloquear_perfil_' + id);
+          li_contato_check_bloquear.setAttribute("data-on-text", "Perfil Bloqueado");
+          li_contato_check_bloquear.setAttribute("data-label-text", "Bloquear Perfil");
+          li_contato_check_bloquear.setAttribute("data-id", id);
+          if(contatos[id]["bloquear_perfil"]){
+            li_contato_check_bloquear.setAttribute("checked", contatos[id]["bloquear_perfil"]);
+          }
 
           li_contato_botao_rm.addEventListener('click', remover_contato);
           li_contato_botao_rm.setAttribute("data-idcontato", id);
-          li_contato_botao_rm.setAttribute("class", "btn btn-danger");
+          li_contato_botao_rm.setAttribute("class", "btn btn-danger botao_mostrar_contato");
 
           li_contato.setAttribute("id", id);
           li_contato.setAttribute("class", "list-group-item");
@@ -65,14 +75,31 @@ function restore_options() {
           li_contato_img.setAttribute("src", img);
           li_contato_img.setAttribute("class", "pull-left");
 
-          li_contato_span_texto.setAttribute("class", "texto");
+          li_contato_span_texto.setAttribute("class", "texto col-md-2");
+
+          li_contato_check_bloquear.setAttribute("class", "bootstrap-switch-handle-on bootstrap-switch-primary");
 
           li_contato.appendChild(li_contato_img);
           li_contato.appendChild(li_contato_span_texto);
-          li_contato.appendChild(li_contato_botao_rm);
           li_contato_span_texto.appendChild(li_contato_text);
           li_contato_botao_rm.appendChild(li_contato_botao_rm_text);
+          li_contato.appendChild(li_contato_check_bloquear);
+          li_contato.appendChild(li_contato_botao_rm);
           lista.appendChild(li_contato);
+
+          $("[name='checkbox_bloquear_perfil_" + id + "']").bootstrapSwitch();
+          $('input[name="checkbox_bloquear_perfil_' + id + '"]').on('switchChange.bootstrapSwitch', function(event, state) {
+            var storage = chrome.storage.local;
+            storage.get(str_contatos_bloqueados, function(r){
+              var contatos = r[str_contatos_bloqueados];
+              console.log(state);
+              var id = event.target.getAttribute("data-id");
+              contatos[id]["bloquear_perfil"] = state;
+              obj = {};
+              obj[str_contatos_bloqueados] = contatos;
+              storage.set(obj);
+            });
+          });
         }
     });
 }
