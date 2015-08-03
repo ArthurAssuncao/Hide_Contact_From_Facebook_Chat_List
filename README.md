@@ -12,15 +12,16 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 
 ## Como usar:
 - Clique sobre o contato e arraste até a área de soltura no centro da página.
-- Para mostrar novamente o contato, basta acessar a pagina de opções da extensão e clicar em Mostrar Contato.
+- Para mostrar novamente o contato, basta acessar a página de opções da extensão e clicar em Mostrar Contato.
+- Para bloquear o acesso ao perfil do contato, basta ir em Opções da extensão e clicar em Bloquear Perfil. O desbloqueio é feito clicando em OFF, no mesmo campo.
 
 ## Screenshot
 #### Screenshot Página Opções
 ![Screenshot](https://github.com/ArthurAssuncao/Hide_Contact_From_Facebook_Chat_List/blob/master/screenshots/pagina_opcoes.png?raw=true "Screenshot Página Opções")
 
 ## Change log:
-0.1.3
-- Pequenas melhorias em desempenho.
+0.1.3, 0.1.4
+- Correção de bugs.
 
 0.1.2
 - Adicionada opção para bloquear acesso ao perfil do contato.
@@ -35,6 +36,7 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 A mensagem mostrada pelo Google Chrome para as permissões solicitadas está muito longe das necessidades reais da extensão, mas as permissões são tecnicamente necessárias pelas seguintes razões:
 
 - Ler e alterar os seus dados no facebook.com: Necessário para acessar a lista do chat.
+- Ler informações do histórico do navegador: Necessário para acessar as abas do Facebook.
 
 ### LICENSE
 O Hide Contact From Facebook Chat List é gratuito.

@@ -61,6 +61,7 @@ function restore_options() {
           li_contato_check_bloquear.setAttribute("data-id", id);
           if(contatos[id]["bloquear_perfil"]){
             li_contato_check_bloquear.setAttribute("checked", contatos[id]["bloquear_perfil"]);
+            li_contato_check_bloquear.setAttribute("data-label-text", "OFF");
           }
 
           li_contato_botao_rm.addEventListener('click', remover_contato);
@@ -100,6 +101,12 @@ function restore_options() {
               obj = {};
               obj[str_contatos_bloqueados] = contatos;
               storage.set(obj);
+              if(state){
+                event.target.setAttribute("data-label-text", "OFF");
+              }
+              else{
+                event.target.setAttribute("data-label-text", "Bloquear Perfil");
+              }
             });
           });
         }
