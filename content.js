@@ -43,17 +43,18 @@ function bloquear_pagina(){
 
 setStyleRule = function(selector, rule) {
     var stylesheet = document.styleSheets[(document.styleSheets.length - 1)];
-    //verifica se a regra existe
-    if(){
-
-    }
-    else{
-        if(stylesheet.addRule) {
-            stylesheet.addRule(selector, rule);
-        } 
-        else if(stylesheet.insertRule) {
-            stylesheet.insertRule(selector + ' { ' + rule + ' }', stylesheet.cssRules.length);
+    var rules = stylesheet.rules;
+    // apaga regras iguais
+    for(var i=0; i < rules.length; i++){
+        if(rules[i].selectorText == selector){
+            stylesheet.deleteRule(i);
         }
+    }
+    if(stylesheet.addRule) {
+        stylesheet.addRule(selector, rule);
+    } 
+    else if(stylesheet.insertRule) {
+        stylesheet.insertRule(selector + ' { ' + rule + ' }', stylesheet.cssRules.length);
     }
 };
 
