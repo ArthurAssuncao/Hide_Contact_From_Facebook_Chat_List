@@ -19,6 +19,9 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 ![Screenshot](https://github.com/ArthurAssuncao/Hide_Contact_From_Facebook_Chat_List/blob/master/screenshots/pagina_opcoes.png?raw=true "Screenshot Página Opções")
 
 ## Change log:
+0.1.3
+- Pequenas melhorias em desempenho.
+
 0.1.2
 - Adicionada opção para bloquear acesso ao perfil do contato.
 
