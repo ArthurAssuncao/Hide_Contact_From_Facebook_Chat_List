@@ -8,6 +8,12 @@ console.log("Extensao Hide Contact From Facebook Chat List");
 var seletor_painel_chat_inicio = "li[data-id='";
 var seletor_painel_chat_fim = "']"
 var str_contatos_bloqueados = 'contatos_bloqueados';
+var regra_css_esconder_contato = ''+
+        'display:none;'
+;
+var regra_css_mostrar_contato = ''+
+        'display:block;'
+;
 
 //bloqueia a pagina caso seja de um contato oculto e marcado para bloquear
 //<meta property="al:android:url" content="fb://profile/id_contato" />
@@ -41,7 +47,7 @@ function bloquear_pagina(){
     }
 }
 
-setStyleRule = function(selector, rule) {
+function remover_stylesheet_rule(selector, rule){
     var stylesheet = document.styleSheets[(document.styleSheets.length - 1)];
     var rules = stylesheet.rules;
     // apaga regras iguais
@@ -50,6 +56,12 @@ setStyleRule = function(selector, rule) {
             stylesheet.deleteRule(i);
         }
     }
+}
+
+setStyleRule = function(selector, rule) {
+    var stylesheet = document.styleSheets[(document.styleSheets.length - 1)];
+    // apaga regras iguais
+    remover_stylesheet_rule(selector, rule);
     if(stylesheet.addRule) {
         stylesheet.addRule(selector, rule);
     } 
@@ -60,11 +72,8 @@ setStyleRule = function(selector, rule) {
 
 function escoder_contato(contato, insert){
     //console.log("Escondendo contato: " + JSON.stringify(contato));
-    var regra_css = ''+
-        'display:none;'
-    ;
     var seletor = seletor_painel_chat_inicio + contato["id"] + seletor_painel_chat_fim;
-    setStyleRule(seletor, regra_css);
+    setStyleRule(seletor, regra_css_esconder_contato);
     //salva no storage
     if(insert){
         var storage = chrome.storage.local;
@@ -193,6 +202,20 @@ function fireContentLoadedEvent () {
         }
     }
 } //funcao executada ao fim da pagina carregar
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        //console.log(request);
+        if (request.tipo == "mostrar_contato"){
+            var id_contato = request.id_contato;
+            //console.log("mostrar contato: " + id_contato);
+            var seletor = seletor_painel_chat_inicio + id_contato + seletor_painel_chat_fim;
+            setStyleRule(seletor, regra_css_mostrar_contato);
+            remover_stylesheet_rule(seletor, null);
+        }
+        sendResponse({result: "ok"});
+    }
+);
 
 document.addEventListener('DOMContentLoaded', bloquear_pagina, false);
 window.addEventListener ("load", fireContentLoadedEvent, false);

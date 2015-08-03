@@ -12,8 +12,10 @@ function remover_contato(event){
     obj[str_contatos_bloqueados] = contatos;
     storage.set(obj);
     event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+    chrome.runtime.getBackgroundPage(function (backgroundPage) {
+        backgroundPage.mostrar_contato(id_contato);
+    });
   });
-  
 }
 
 function save_options() {
