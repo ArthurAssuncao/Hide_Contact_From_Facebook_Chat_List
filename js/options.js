@@ -5,9 +5,9 @@ function remover_contato(event){
   storage.get(str_contatos_bloqueados, function(r){
     var contatos = r[str_contatos_bloqueados];
     var id_contato = event.target.getAttribute("data-idcontato");
-    console.log("remover contato: " + contatos[id_contato]["nome"]);
+    //console.log("remover contato: " + contatos[id_contato]["nome"]);
     delete contatos[id_contato];
-    console.log(contatos);
+    //console.log(contatos);
     obj = {};
     obj[str_contatos_bloqueados] = contatos;
     storage.set(obj);
@@ -95,7 +95,7 @@ function restore_options() {
             var storage = chrome.storage.local;
             storage.get(str_contatos_bloqueados, function(r){
               var contatos = r[str_contatos_bloqueados];
-              console.log(state);
+              //console.log(state);
               var id = event.target.getAttribute("data-id");
               contatos[id]["bloquear_perfil"] = state;
               obj = {};
