@@ -72,6 +72,8 @@ function restore_options() {
 
           li_contato_img.setAttribute("width", "36px");
           li_contato_img.setAttribute("height", "36px");
+          // img default
+          // https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/c46.9.109.109/283270_257757160902107_690367_n.jpg?oh=52948be8dc44a2d16b7d552efbae1f83&oe=565A3CDD&__gda__=1447636909_5ee3a02af75a7f31cebd231d077651df
           li_contato_img.setAttribute("src", img);
           li_contato_img.setAttribute("class", "pull-left");
 
