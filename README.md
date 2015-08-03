@@ -33,7 +33,7 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 - Extensão criada
 
 ### PERMISSOES
-A mensagem mostrada pelo Google Chrome para as permissões solicitadas está muito longe das necessidades reais da extensão, mas as permissões são tecnicamente necessárias pelas seguintes razões:
+As mensagens mostradas pelo Google Chrome para as permissões solicitadas está muito longe das necessidades reais da extensão, mas as permissões são tecnicamente necessárias pelas seguintes razões:
 
 - Ler e alterar os seus dados no facebook.com: Necessário para acessar a lista do chat.
 - Ler informações do histórico do navegador: Necessário para acessar as abas do Facebook.
