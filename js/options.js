@@ -57,9 +57,10 @@ function restore_options() {
           var li_contato_check_bloquear = document.createElement("INPUT");
 
           li_contato_check_bloquear.setAttribute("type", 'checkbox');
+          li_contato_check_bloquear.setAttribute("data-label-width", '170px');
           li_contato_check_bloquear.setAttribute("name", 'checkbox_bloquear_perfil_' + id);
           li_contato_check_bloquear.setAttribute("data-on-text", "Perfil Bloqueado");
-          li_contato_check_bloquear.setAttribute("data-label-text", "Bloquear Perfil");
+          li_contato_check_bloquear.setAttribute("data-label-text", "Bloquear Acesso ao Perfil");
           li_contato_check_bloquear.setAttribute("data-id", id);
           if(contatos[id]["bloquear_perfil"]){
             li_contato_check_bloquear.setAttribute("checked", contatos[id]["bloquear_perfil"]);
@@ -107,7 +108,7 @@ function restore_options() {
                 event.target.setAttribute("data-label-text", "OFF");
               }
               else{
-                event.target.setAttribute("data-label-text", "Bloquear Perfil");
+                event.target.setAttribute("data-label-text", "Bloquear Acesso ao Perfil");
               }
             });
           });

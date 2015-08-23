@@ -20,6 +20,9 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 ![Screenshot](https://github.com/ArthurAssuncao/Hide_Contact_From_Facebook_Chat_List/blob/master/screenshots/pagina_opcoes.png?raw=true "Screenshot Página Opções")
 
 ## Change log:
+0.1.7
+- Melhorias na página de Opções e mudança no status do contato para offline na lista de pesquisa do chat. O contato escondido, aparecerá na lista de pesquisa, mas sempre como offline.
+
 0.1.6
 - Ao clicar em Mostrar Contato, o contato aparece imediatamente na lista do chat.
 

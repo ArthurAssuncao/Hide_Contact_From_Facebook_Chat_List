@@ -14,6 +14,12 @@ var regra_css_esconder_contato = ''+
 var regra_css_mostrar_contato = ''+
         'display:block;'
 ;
+var regra_css_esconder_contato_status = ''+
+        'background-position: -26px -296px; height: 11px;'
+;
+var regra_css_mostrar_contato_status = ''+
+        'background-position: -26px -318px; height: 7px;'
+;
 
 //bloqueia a pagina caso seja de um contato oculto e marcado para bloquear
 //<meta property="al:android:url" content="fb://profile/id_contato" />
@@ -58,7 +64,7 @@ function remover_stylesheet_rule(selector, rule){
     }
 }
 
-setStyleRule = function(selector, rule) {
+set_style_rule = function(selector, rule) {
     var stylesheet = document.styleSheets[(document.styleSheets.length - 1)];
     // apaga regras iguais
     remover_stylesheet_rule(selector, rule);
@@ -70,10 +76,15 @@ setStyleRule = function(selector, rule) {
     }
 };
 
-function escoder_contato(contato, insert){
+function esconder_contato(contato, insert){
     //console.log("Escondendo contato: " + JSON.stringify(contato));
     var seletor = seletor_painel_chat_inicio + contato["id"] + seletor_painel_chat_fim;
-    setStyleRule(seletor, regra_css_esconder_contato);
+    set_style_rule(seletor, regra_css_esconder_contato);
+    var seletor_status = seletor_painel_chat_inicio + contato["id"] + seletor_painel_chat_fim + ' i';
+    set_style_rule(seletor_status, regra_css_esconder_contato_status);
+    var seletor_status_search = 'ul[id="typeahead_list_u_0_1o"] a[href="/messages/' + contato["id"] + '"] i';
+    set_style_rule(seletor_status_search, regra_css_esconder_contato_status);
+    
     //salva no storage
     if(insert){
         var storage = chrome.storage.local;
@@ -92,7 +103,7 @@ function esconder_contatos(){
     storage.get(str_contatos_bloqueados, function(r){
         var contatos = r[str_contatos_bloqueados];
         for(id in contatos){
-            escoder_contato(contatos[id], false);
+            esconder_contato(contatos[id], false);
         }
     });
 }
@@ -111,6 +122,7 @@ function update_lista(lista){
             if (item.nodeName == "LI") {
                 var id_contato = item.getAttribute("data-id");
                 var nome_contato = item.childNodes[0].childNodes[0].childNodes[2].childNodes[0].innerHTML;
+                //var status_contato = item.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[1];
                 var img = item.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].getAttribute("src");
                 var contato = {"id": id_contato, "nome": nome_contato, "img": img, "bloquear_perfil": false};
                 item.setAttribute("draggable", "true");
@@ -121,6 +133,7 @@ function update_lista(lista){
                     item = event.target;
                     var id_contato = item.getAttribute("data-id");
                     var nome_contato = item.childNodes[0].childNodes[0].childNodes[2].childNodes[0].innerHTML;
+                    //var status_contato = item.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[1];
                     var img = item.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].getAttribute("src");
                     event.dataTransfer.effectAllowed = "move";
                     var contato = {"id": id_contato, "nome": nome_contato, "img": img, "bloquear_perfil": false};
@@ -164,7 +177,7 @@ function fireContentLoadedEvent () {
         ev.preventDefault();
         var contato = JSON.parse(ev.dataTransfer.getData("contato"));
         //console.log(contato);
-        escoder_contato(contato, true);
+        esconder_contato(contato, true);
 
         return false;
     }
@@ -210,7 +223,7 @@ chrome.runtime.onMessage.addListener(
             var id_contato = request.id_contato;
             //console.log("mostrar contato: " + id_contato);
             var seletor = seletor_painel_chat_inicio + id_contato + seletor_painel_chat_fim;
-            setStyleRule(seletor, regra_css_mostrar_contato);
+            set_style_rule(seletor, regra_css_mostrar_contato);
             remover_stylesheet_rule(seletor, null);
         }
         sendResponse({result: "ok"});
