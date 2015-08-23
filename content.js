@@ -53,6 +53,8 @@ function bloquear_pagina(){
     }
 }
 
+
+
 function remover_stylesheet_rule(selector, rule){
     var stylesheet = document.styleSheets[(document.styleSheets.length - 1)];
     var rules = stylesheet.rules;
@@ -108,6 +110,40 @@ function esconder_contatos(){
     });
 }
 
+
+function bloquear_abertura_janela_chat(){
+    var janelas = document.getElementsByClassName('fbNubGroup');
+    janelas = janelas[janelas.length-1];
+    for (var i=0;i<janelas.childNodes.length;i++) {
+        var janela = janelas.childNodes[i];
+        var janela_name = janela.getElementsByClassName("titlebarText")[0];
+        var janela_fechar = janela.getElementsByClassName("close")[0];
+        var nome_contato = janela_name.childNodes[0].childNodes[0].innerText;
+
+        var storage = chrome.storage.local;
+        storage.get(str_contatos_bloqueados, function(r){
+            var contatos = r[str_contatos_bloqueados];
+            for(id in contatos){
+                if(nome_contato == contatos[id]['nome'] && (contatos[id]['bloquear_chat_window'] != 'undefined' && contatos[id]['bloquear_chat_window']) ){
+                    //janela.remove();
+                    janela_fechar.click();
+                }
+            }
+        });
+    }
+}
+
+function updater_janelas_chat(){
+    var observer_janelas_chat = new MutationObserver(function(mutations) {
+        //console.log("Houve mudança nas janelas do chat");
+        bloquear_abertura_janela_chat();
+    });
+
+    var janelas_chat = document.getElementsByClassName('fbNubGroup');
+    janelas_chat = janelas_chat[janelas_chat.length-1];
+    observer_janelas_chat.observe(janelas_chat, { childList: true });
+}
+
 function update_lista(lista){
     var lista_contatos = {};
     if(lista != null){
@@ -157,6 +193,9 @@ function fireContentLoadedEvent () {
     //console.log("fireContentLoadedEvent");
 
     esconder_contatos();
+
+    bloquear_abertura_janela_chat();
+    updater_janelas_chat();
 
     var lixeira = document.createElement('div');
     var lixeira_texto = document.createElement('span');

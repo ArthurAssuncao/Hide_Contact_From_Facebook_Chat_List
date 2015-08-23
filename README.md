@@ -9,6 +9,8 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 
 ## Funções:
 - Esconde contatos da lista do chat do Facebook sem bloquear o contato.
+- Bloqueia, se a opção for marcada, a abertura de janelas de chat dos contatos escondidos.
+- Bloqueia, se a opção for marcada, o acesso ao perfil do contato escondido.
 
 ## Como usar:
 - Clique sobre o contato e arraste até a área de soltura no centro da página.
@@ -20,6 +22,9 @@ Atenção: Esta extensão apenas esconde o contato da lista, portanto ainda é p
 ![Screenshot](https://github.com/ArthurAssuncao/Hide_Contact_From_Facebook_Chat_List/blob/master/screenshots/pagina_opcoes.png?raw=true "Screenshot Página Opções")
 
 ## Change log:
+0.1.8
+- Adicionado: opção para bloquear a abertura de janelas do chat dos contatos escondidos.
+
 0.1.7
 - Melhorias na página de Opções e mudança no status do contato para offline na lista de pesquisa do chat. O contato escondido, aparecerá na lista de pesquisa, mas sempre como offline.
 
