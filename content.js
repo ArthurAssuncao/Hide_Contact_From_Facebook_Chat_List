@@ -112,25 +112,31 @@ function esconder_contatos(){
 
 
 function bloquear_abertura_janela_chat(){
-    var janelas = document.getElementsByClassName('fbNubGroup');
-    janelas = janelas[janelas.length-1];
-    for (var i=0;i<janelas.childNodes.length;i++) {
-        var janela = janelas.childNodes[i];
-        var janela_name = janela.getElementsByClassName("titlebarText")[0];
-        var janela_fechar = janela.getElementsByClassName("close")[0];
-        var nome_contato = janela_name.childNodes[0].childNodes[0].innerText;
-
-        var storage = chrome.storage.local;
-        storage.get(str_contatos_bloqueados, function(r){
+    var storage = chrome.storage.local;
+    storage.get(str_contatos_bloqueados, function(r){
+        var janelas = document.getElementsByClassName('fbNubGroup');
+        janelas = janelas[janelas.length-1];
+        for (var i=0;i<janelas.childNodes.length;i++) {
+            var janela = janelas.childNodes[i];
+            var janela_name = janela.getElementsByClassName("titlebarText")[0];
+            var janela_fechar = janela.getElementsByClassName("close")[0];
+            var nome_contato = janela_name.childNodes[0].childNodes[0].innerText;
+            // console.log(tag_span.innerText);
+            // console.log(tag_span.innerHTML);
+            // console.log(tag_span.textContent);
+            
             var contatos = r[str_contatos_bloqueados];
             for(id in contatos){
+                console.log(nome_contato + ' - ' + contatos[id]['nome']);
                 if(nome_contato == contatos[id]['nome'] && (contatos[id]['bloquear_chat_window'] != 'undefined' && contatos[id]['bloquear_chat_window']) ){
                     //janela.remove();
+                    // console.log("removendo: " + contatos[id]['nome']);
                     janela_fechar.click();
                 }
             }
-        });
-    }
+            
+        }
+    });
 }
 
 function updater_janelas_chat(){
@@ -141,7 +147,14 @@ function updater_janelas_chat(){
 
     var janelas_chat = document.getElementsByClassName('fbNubGroup');
     janelas_chat = janelas_chat[janelas_chat.length-1];
-    observer_janelas_chat.observe(janelas_chat, { childList: true });
+    observer_janelas_chat.observe(janelas_chat, { childList: true, subtree: true });
+    // O correto seria usar um codigo semelhante ao abaixo, porem ele nao percebe a mudanca do innerHTML.
+    // http://w3c-test.org/dom/nodes/MutationObserver-inner-outer.html
+    // for (var i=0;i<janelas_chat.childNodes.length;i++) {
+    //     var janela = janelas_chat.childNodes[i];
+    //     var janela_name = janela.getElementsByClassName("titlebarText")[0];
+    //     observer_janelas_chat.observe(janela_name, { childList: true, subtree: true, characterData: true });
+    // }
 }
 
 function update_lista(lista){
