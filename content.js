@@ -212,7 +212,7 @@ function fireContentLoadedEvent () {
 
     var lixeira = document.createElement('div');
     var lixeira_texto = document.createElement('span');
-    lixeira_texto.innerHTML = 'Arraste para aqui o contato que voce quer ocultar';
+    lixeira_texto.innerHTML = 'Arraste para aqui o contato que você quer ocultar';
     lixeira.appendChild(lixeira_texto);
     lixeira.setAttribute("id", "hide_contact_lixeira");
     lixeira.style.cssText = 'display:none;position:fixed;left:40%;top:40%;width:20%;height:20%;opacity:0.8;z-index:1000;background:#fff;border:3px dashed #7790b5;line-height:100px;';
@@ -237,6 +237,8 @@ function fireContentLoadedEvent () {
     document.body.insertBefore(lixeira, document.body.firstChild);
 
     var side_bar = document.getElementsByClassName("fbChatSidebar")[0];
+
+    var side_bar = side_bar.getElementsByClassName("fbChatOrderedList")[0].firstChild;
     
     if(typeof side_bar === 'undefined'){
         console.log("Nao foi possivel adicionar o evento a sidebar");
@@ -246,23 +248,28 @@ function fireContentLoadedEvent () {
         side_bar.onmouseenter = function(){
         //function pegar_lista_chat(){
             //console.log("atualizando lista do chat");
-            var listas = document.getElementsByTagName("ul");
+            var listas = side_bar.getElementsByTagName("ul");
             var lista_ordenada = null;
+            var lista_grupos = null;
             var lista_mais_amigos = null;
             //acha a q tem .o.$ordered_list
             //more_online_friends
-            for (var i = 0, len = listas.length; i < len; i++ ) {
-                if(listas[i].getAttribute("data-reactid") != null && listas[i].getAttribute("data-reactid").indexOf("$ordered_list") != -1){
-                    lista_ordenada = listas[i];
-                }
-                else if(listas[i].getAttribute("data-reactid") != null && listas[i].getAttribute("data-reactid").indexOf("$more_online_friends") != -1){
-                    lista_mais_amigos = listas[i];
-                }
-                if(lista_ordenada != null && lista_mais_amigos != null){
-                    break;
-                }
-            }
+            // for (var i = 0, len = listas.length; i < len; i++ ) {
+            //     if(listas[i].getAttribute("data-reactid") != null && listas[i].getAttribute("data-reactid").indexOf("$ordered_list") != -1){
+            //         lista_ordenada = listas[i];
+            //     }
+            //     else if(listas[i].getAttribute("data-reactid") != null && listas[i].getAttribute("data-reactid").indexOf("$more_online_friends") != -1){
+            //         lista_mais_amigos = listas[i];
+            //     }
+            //     if(lista_ordenada != null && lista_mais_amigos != null){
+            //         break;
+            //     }
+            // }
+            lista_ordenada = listas[0];
+            lista_grupos = listas[1];
+            lista_mais_amigos = listas[2];
             update_lista(lista_ordenada);
+            update_lista(lista_grupos);
             update_lista(lista_mais_amigos);
         }
     }
